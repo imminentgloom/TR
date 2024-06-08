@@ -102,7 +102,10 @@ end
 
 function crow_output()
 	for n = 1, 4 do
-		if s[step][n] == 1 then crow.output[n].pulse() end
+		if s[step][n] == 1 then
+		    crow.output[n].action = 'pulse()'
+		    crow.output[n]()
+		end
 	end
 end
 
