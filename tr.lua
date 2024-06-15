@@ -50,7 +50,7 @@ function init()
 	erase = false
 	fill = false
 
-			
+	
 	params:add_group('TR', 16)
 	
 	params:add_separator('Track 1')
@@ -97,6 +97,8 @@ function init()
 	params:add_control('amp4','Amp', controlspec.new(0, 1, 'lin', 0, 0.25))
 	params:set_action('amp4', function(x) engine.amp(4, x) end)
 	
+	params:read('/home/we/dust/data/tr/state.pset')
+	
 	params:bang()
 
 
@@ -132,7 +134,6 @@ function redraw_grid()
 
 	-- ligth up current loop
 	for n = loop_min, loop_max do g:led(n, 6, 4) end
-	
 	
 	-- blink trigger buttons
 	for n = 1, 4 do
@@ -245,7 +246,6 @@ function g.key(x, y, z)
 				loop_max = loop[1]
 			end
 			start = loop_min
-
 			stop = loop_max
 		end
 		table.remove(loop) 
@@ -276,5 +276,5 @@ function enc(n, d)
 end
 
 function cleanup()
-
+	params:write('/home/we/dust/data/tr/state.pset')
 end
